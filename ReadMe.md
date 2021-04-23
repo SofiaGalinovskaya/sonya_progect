@@ -1,0 +1,1 @@
+This project is about stylometry. Using simple, practical school formulas, you can get quite interesting results.
