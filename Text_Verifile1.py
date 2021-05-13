@@ -7,7 +7,9 @@ import matplotlib.pyplot as plt
 
 class Work:
 
-    def reader(self, name):
+    def__штшеinit__ (self, name ,c, q):
+        self.quantity = q
+        self.particle = c
         self.name = name
         try:
             self.doc = codecs.open(self.name, 'r', 'utf-8').read()
