@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 class Work:
 
-    def__штшеinit__ (self, name ,c, q):
+    def__init__ (self, name ,c, q):
         self.quantity = q
         self.particle = c
         self.name = name
