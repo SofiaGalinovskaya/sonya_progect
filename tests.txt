@@ -1,0 +1,88 @@
+Text_Verifile1.py
+
+import nltk
+import codecs
+import string
+import matplotlib.pyplot as plt
+
+
+class Work:
+
+    def __init__(self, name, c, q):
+        self.quantity = q
+        self.particle = c
+        self.name = name
+        try:
+            self.doc = codecs.open(self.name, 'r', 'utf-8').read()
+        except:
+            self.doc = codecs.open(self.name, 'r', 'cp1251').read()
+
+    def text_sentences_length(self):
+        sentences = nltk.sent_tokenize(self.doc)
+        self.sentences_word_length = [len(sent.split()) for sent in sentences]
+        average_sentences_word_length = (sum(self.sentences_word_length) / len(self.sentences_word_length))
+        return average_sentences_word_length
+
+    def tokenize(self):
+        word = nltk.word_tokenize(self.doc)
+        remove_punctuation = str.maketrans('', '', string.punctuation)
+        self.tokens_ = [x for x in [t.translate(remove_punctuation).lower() for t in word] if len(x) > 0]
+
+    def words_length(self):
+        words = set(self.tokens_)
+        word_chars = [len(word) for word in words]
+        return word_chars
+
+    def text_lexical(self):
+        lexical_diversity = (len(set(self.tokens_)) / len(self.tokens_)) * 100
+        return lexical_diversity
+
+    def word_mean_length(self, word_chars):
+        mean_word_len = sum(word_chars) / float(len(word_chars))
+        return mean_word_len
+
+    def commas_in_text(self):
+        tokens = nltk.word_tokenize(self.doc)
+        dist = nltk.probability.FreqDist(nltk.Text(tokens))
+        commas_per_quantity = (dist[self.particle] * self.quantity) / dist.N()
+        return commas_per_quantity
+
+    def visual_thinks(self):
+        x_list = list(range(0, len(self.sentences_word_length)))
+        y1_list = list(self.sentences_word_length)
+        plt.plot(x_list, y1_list)
+        plt.ylabel("Длина предложений", fontsize=14, fontweight="bold")
+        plt.show()
+
+
+
+test1.py
+
+import unittest
+from Text_Verifile1 import Work
+
+
+class Test_Text(unittest.TestCase):
+    """Тесты для библиотеки"""
+
+    def test_sentences_length(self):
+        q = Work('file.txt', ',', 100)
+        p = q.text_sentences_length()
+        if p == 0:
+            ph = False
+        else:
+            ph = True
+        self.assertEqual(ph, True)
+
+    def test_words_length(self):
+        q = Work('file.txt', ',', 100)
+        p = q.commas_in_text()
+        if p == 0:
+            ph = False
+        else:
+            ph = True
+        self.assertEqual(ph, True)
+
+
+if __name__ == '__main__':
+    unittest.main()
