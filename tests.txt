@@ -1,4 +1,4 @@
-Text_Verifile1.py
+Library.py
 
 import nltk
 import codecs
@@ -54,9 +54,7 @@ class Work:
         plt.ylabel("Длина предложений", fontsize=14, fontweight="bold")
         plt.show()
 
-
-
-test1.py
+A part of code.py
 
 import unittest
 from Text_Verifile1 import Work
